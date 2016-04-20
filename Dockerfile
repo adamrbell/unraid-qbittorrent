@@ -9,10 +9,10 @@ apt-get install $APTLIST -qy && \
 
 # cleanup
 apt-get clean -y && \
-rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 
 #Create symbolic links to simplify mounting
-/sbin/useradd --system --uid 520 -m --shell /usr/sbin/nologin qbittorrent \
+&& useradd --system --uid 520 -m --shell /usr/sbin/nologin qbittorrent \
 
 && mkdir -p /home/qbittorrent/.config/qBittorrent \
 && ln -s /home/qbittorrent/.config/qBittorrent /config \
