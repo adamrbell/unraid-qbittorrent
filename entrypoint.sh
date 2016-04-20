@@ -9,4 +9,4 @@ fi
 # Allow groups to change files.
 umask 002
 
-exec "$@"
+#exec "$@"
