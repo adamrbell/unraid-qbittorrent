@@ -11,7 +11,7 @@ apt-get install $APTLIST -qy && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY qBittorrent.conf /build/qBittorrent.conf
+ADD qBittorrent.conf /build/qBittorrent.conf
 
 VOLUME /root/.config/qBittorrent
 VOLUME /root/.local/share/data/qBittorrent
@@ -19,6 +19,6 @@ VOLUME /root/Downloads
 
 EXPOSE 8080
 
-COPY start.sh /
+ADD start.sh /
 RUN chmod -v +x /start.sh
 CMD ["/start.sh"]
