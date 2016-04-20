@@ -23,12 +23,12 @@ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
 && chown -R qbittorrent:qbittorrent /home/qbittorrent/ \
 
 && mkdir /downloads \
-&& chown qbittorrent:qbittorrent /downloads \
-
-&& chmod -v +x entrypoint.sh
+&& chown qbittorrent:qbittorrent /downloads
 
 ADD qBittorrent.conf /default/qBittorrent.conf
 ADD entrypoint.sh /
+
+RUN  chmod -v +x /entrypoint.sh
 
 VOLUME /config
 VOLUME /torrents
