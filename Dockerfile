@@ -20,5 +20,5 @@ VOLUME /root/Downloads
 EXPOSE 8080
 
 COPY start.sh /
-RUN chmod +x /start.sh
+RUN chmod -v +x /start.sh
 CMD ["/start.sh"]
