@@ -40,4 +40,5 @@ EXPOSE 6881
 USER qbittorrent
 
 ENTRYPOINT ["/entrypoint.sh"]
-#CMD ["qbittorrent-nox"]
+
+CMD ["qbittorrent-nox -d"]
