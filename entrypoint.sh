@@ -10,6 +10,3 @@ fi
 umask 002
 
 #exec "$@"
-
-echo "Starting qbittorrent..."
-exec qbittorrent-nox -d
