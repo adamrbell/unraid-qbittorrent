@@ -11,14 +11,31 @@ apt-get install $APTLIST -qy && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ADD qBittorrent.conf /build/qBittorrent.conf
+#Create symbolic links to simplify mounting
+useradd --system --uid 520 -m --shell /usr/sbin/nologin qbittorrent \
 
-VOLUME /root/.config/qBittorrent
-VOLUME /root/.local/share/data/qBittorrent
-VOLUME /root/Downloads
+&& mkdir -p /home/qbittorrent/.config/qBittorrent \
+&& ln -s /home/qbittorrent/.config/qBittorrent /config \
+
+&& mkdir -p /home/qbittorrent/.local/share/data/qBittorrent \
+&& ln -s /home/qbittorrent/.local/share/data/qBittorrent /torrents \
+
+&& chown -R qbittorrent:qbittorrent /home/qbittorrent/ \
+
+&& mkdir /downloads \
+&& chown qbittorrent:qbittorrent /downloads
+
+ADD qBittorrent.conf /default/qBittorrent.conf
+ADD entrypoint.sh /
+
+VOLUME /config
+VOLUME /torrents
+VOLUME /downloads
 
 EXPOSE 8080
+EXPOSE 6881
 
-ADD start.sh /
-RUN chmod -v +x /start.sh
-CMD ["/start.sh"]
+USER qbittorrent
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["qbittorrent-nox"]
