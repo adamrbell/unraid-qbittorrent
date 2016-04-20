@@ -11,11 +11,14 @@ apt-get install $APTLIST -qy && \
 apt-get clean -y && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#Adding Custom files
 COPY qBittorrent.conf /build/qBittorrent.conf
 
-# Mappings and Ports
-EXPOSE 8080
 VOLUME /root/.config/qBittorrent
 VOLUME /root/.local/share/data/qBittorrent
 VOLUME /root/Downloads
+
+EXPOSE 8080
+
+COPY start.sh /
+RUN chmod +x /start.sh
+CMD ["/start.sh"]
